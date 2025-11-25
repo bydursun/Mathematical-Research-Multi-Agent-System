@@ -10,8 +10,8 @@ A sophisticated multi-agent AI system using CrewAI that helps Research Analysts 
 ## 🚀 Quick Start
 
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/bydursun/Mathematical-Research-Multi-Agent-System.git
+cd <Mathematical-Research-Multi-Agent-System>
 
 # Optional: create & activate virtual environment (Windows PowerShell)
 python -m venv .venv
@@ -88,19 +88,22 @@ Final Answer
 
 ```
 .
-├── math_rag_crewai_app.py          # Main application (312 lines)
-├── knowledge/
-│   └── math_knowledge.txt          # Mathematical knowledge base
-├── math_db/                        # ChromaDB vector storage
+├── math_rag_crewai_app.py          # Main application with 5 AI agents
+├── requirements.txt                # Python dependencies
+├── README.md                       # This file
+├── .gitignore                      # Git ignore rules (excludes vector DBs)
+├── knowledge/                      # Mathematical knowledge base
+│   ├── math_knowledge.txt          # General mathematics concepts
+│   └── limits.txt                  # Calculus limits knowledge
+├── db/                             # ChromaDB vector storage (auto-generated)
 │   ├── chroma.sqlite3
 │   └── [collection data]
-├── PROJECT_EXPLANATION.md          # Comprehensive documentation
-├── PRESENTATION_SCRIPT.md          # 5-minute demo guide
-├── RUBRIC_CHECKLIST.md            # Deliverables verification
-├── CHEAT_SHEET.md                 # Quick reference guide
-├── FINAL_SUMMARY.md               # Project completion summary
-└── README.md                       # This file
+└── math_db/                        # Alternative ChromaDB storage (auto-generated)
+    ├── chroma.sqlite3
+    └── [collection data]
 ```
+
+**Note:** The `db/` and `math_db/` directories are automatically generated on first run and excluded from version control.
 
 ---
 
@@ -173,17 +176,21 @@ Feedback is used by the Summarization Agent to improve the final answer.
 
 ---
 
-## 🗄️ Vector Database Lifecycle
+## 🗄️ Vector Database Management
 
-The ChromaDB persistence lives in `math_db/` (and the older `db/` directory). These are generated artifacts and excluded via `.gitignore`; they can be fully rebuilt from the raw text files in `knowledge/`.
+The ChromaDB vector database is stored in `db/` and `math_db/` directories. These are auto-generated from the knowledge files and excluded from Git via `.gitignore`.
 
-Rebuild steps (Windows PowerShell):
+**Rebuild Database (if needed):**
 ```powershell
-Remove-Item -Recurse -Force math_db
-streamlit run math_rag_crewai_app.py  # first run recreates DB
+# Windows PowerShell
+Remove-Item -Recurse -Force db, math_db
+streamlit run math_rag_crewai_app.py  # Recreates DB on startup
 ```
 
-If you add new knowledge documents, delete the folder and rerun to refresh embeddings.
+**Adding New Knowledge:**
+1. Add/edit files in `knowledge/` directory
+2. Delete the database folders
+3. Restart the application to regenerate embeddings
 
 ---
 
@@ -238,26 +245,28 @@ If you add new knowledge documents, delete the folder and rerun to refresh embed
 
 ---
 
-## 📖 Documentation Files
+## 📖 Knowledge Base
 
-- **PROJECT_EXPLANATION.md** - Complete system documentation with architecture, workflows, UML diagrams
-- **PRESENTATION_SCRIPT.md** - Step-by-step 5-minute demonstration guide
-- **RUBRIC_CHECKLIST.md** - Verification of all project deliverables
-- **CHEAT_SHEET.md** - Quick reference for key concepts and talking points
-- **FINAL_SUMMARY.md** - Project completion summary and preparation guide
+The system includes two knowledge files in the `knowledge/` directory:
+
+- **math_knowledge.txt** - Core mathematical concepts covering calculus, algebra, probability, statistics, number theory, topology, and graph theory
+- **limits.txt** - Detailed explanations of limits in calculus with examples and properties
+
+These files are automatically indexed into ChromaDB vector database on first run.
 
 ---
 
-## 🎬 Demo Script
+## 🎬 Demo Workflow
 
-See `PRESENTATION_SCRIPT.md` for a complete 5-minute demonstration guide.
+**Example Research Question:** "What is a derivative?"
 
-**Quick Demo:**
-1. Show architecture (5 agents, hierarchical)
-2. Explain RAG with ChromaDB
-3. Demonstrate tool use
-4. Show reflection mechanism
-5. Discuss responsible AI principles
+1. **Manager Agent** coordinates the workflow
+2. **RAG Agent** retrieves relevant calculus concepts from ChromaDB
+3. **Research Agent** analyzes and explains derivatives with examples
+4. **Reflection Agent** evaluates the answer quality (accuracy, clarity, completeness, pedagogical value)
+5. **Summarization Agent** creates the polished final answer
+
+Response time: 1-2 minutes for complete multi-agent processing
 
 ---
 
@@ -313,13 +322,21 @@ streamlit run math_rag_crewai_app.py
 ```
 
 **ChromaDB error:**
-Delete `math_db/` folder and restart (it will recreate)
+```powershell
+# Delete both database folders and restart
+Remove-Item -Recurse -Force db, math_db
+streamlit run math_rag_crewai_app.py
+```
 
 **OpenAI API error:**
-Ensure your API key is valid and has available credits
+- Ensure your API key is valid and has available credits
+- Check the key format starts with `sk-`
+- Verify you've entered it in the Streamlit sidebar
 
 **Slow response:**
-First query may take 1-2 minutes (normal for multi-agent processing)
+- First query may take 1-2 minutes (normal for multi-agent processing)
+- The Manager coordinates 4 worker agents sequentially
+- Database initialization on first run adds extra time
 
 ---
 

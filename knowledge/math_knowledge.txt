@@ -1,0 +1,25 @@
+Calculus is a branch of mathematics focused on limits, functions, derivatives, integrals, and infinite series.
+                    
+The derivative measures the rate of change of a function. For a function f(x), the derivative f'(x) represents 
+the instantaneous rate of change at point x. It is defined as: f'(x) = lim(h->0) [f(x+h) - f(x)] / h
+
+The integral is the reverse operation of differentiation. The definite integral of f(x) from a to b represents 
+the area under the curve between those points.
+
+Linear algebra deals with vector spaces, linear mappings, matrices, and systems of linear equations. 
+A matrix is a rectangular array of numbers arranged in rows and columns.
+
+Probability theory is the branch of mathematics concerned with probability. It provides a mathematical framework 
+for quantifying uncertainty. The probability of an event is a number between 0 and 1.
+
+Statistics involves collecting, analyzing, interpreting, and presenting data. Descriptive statistics summarize data, 
+while inferential statistics make predictions based on samples.
+
+Number theory is a branch of pure mathematics devoted to the study of integers and integer-valued functions. 
+Prime numbers are fundamental in number theory.
+
+Topology studies properties of space that are preserved under continuous deformations. It is sometimes called 
+rubber sheet geometry.
+
+Graph theory studies graphs as mathematical structures used to model pairwise relations between objects. 
+A graph consists of vertices connected by edges.

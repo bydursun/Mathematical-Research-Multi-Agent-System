@@ -1,0 +1,49 @@
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+.env
+*.egg-info/
+
+# Virtual environments
+.env*/
+.venv/
+venv/
+ENV/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Streamlit cache & logs
+.streamlit/
+
+# VSCode settings (optional keep if you want)
+.vscode/
+
+# Jupyter (if later added)
+.ipynb_checkpoints/
+
+# Generated vector / chroma databases (rebuildable)
+math_db/
+db/
+
+# Sensitive or temporary data
+*.sqlite3
+openai_api_key.txt
+
+# Logs
+*.log
+
+# Ignore compiled models or large exports
+models/
+
+# If you add tests coverage
+htmlcov/
+.coverage
+
+# Build artifacts
+build/
+dist/
